@@ -55,3 +55,9 @@ You have probably got outdated driver binaries, by default they are not overwrit
 
 - mvn clean verify -Doverwrite.binaries=true
 - Delete the selenium_standalone_binaries folder in your resources directory
+
+###Hosting a sample application
+
+I use http://pow.cx/ to host the popular 'the-internet' application locally. The app is hosted locally at 'the-internet.dev' to 
+differentiate when running against the customised local app and the hosted version at 
+'https://the-internet.herokuapp.com/'
