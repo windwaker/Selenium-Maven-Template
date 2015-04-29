@@ -1,14 +1,64 @@
 package com.lazerycode.selenium.tests;
 
 import com.lazerycode.selenium.DriverFactory;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.function.Predicate;
+import static org.assertj.core.api.Assertions.*;
+
 public class GoogleExampleWebDriver extends DriverFactory {
+
+    // https://github.com/windwaker/Selenium-Maven-Template
+
+    @Test
+    public void tableSortExample() {
+
+        // http://tablesorter.com/docs/
+
+    }
+
+    @Test
+    public void xExample() {
+
+        // http://internetz.dev/dynamic_loading/2
+
+    }
+
+    @Test
+    public void predicateExample() {
+
+        Predicate p = (s) -> s.equals("carbery");
+
+        if(p.test("carbery")){
+
+        }
+        else{
+            Assert.fail("wrong division");
+        }
+
+    }
+
+
+    @Test
+    public void hardExample() {
+        Employee e =new Employee(25, "Adam");
+        assertThat(e.getAge()).as("Employee Age").isEqualTo(25);
+    }
+
+    @Test
+    public void softExample() {
+        Employee e =new Employee(25, "Adam");
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(e.getAge()).as("Employee Age").isEqualTo(25);
+        softly.assertAll(); // Don't forget this ...
+    }
 
     @Test
     public void googleCheeseExample() {
