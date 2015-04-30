@@ -1,22 +1,40 @@
 Feature: Customer Balance
 
-    Verifying a customer's data should be quick and friendly.
+    Verifying a customer's data should be quick and easy.
 
-    Scenario: ?
+    Scenario: I want to verify I am on the tables page
 
-        New users should get a confirmation email and be greeted
-        personally by the site once signed in.
+        Given I have logged into the application
+        When I navigate to the tables page
+        Then the page should have a title of 'the-internet'
+        And the page should contain the text 'Really Important Stuff'
 
-        Given I have chosen to sign up
-        When I sign up with valid details
-        Then I should receive a confirmation email
-        And I should see a personalized greeting message
+    Scenario: Customers over $500
 
-    Scenario: ?
+        There should be three users with a balance of over $500
 
-        Where someone tries to create an account for an email address
-        that already exists.
+        Given I have logged into the application
+        When I navigate to the tables page
+        Then I should see three customers with over $500
 
-        Given I have chosen to sign up
-        When I sign up with an email address that has already registered Then I should be told that the email is already registered
-        And I should be offered the option to recover my password
+    Scenario: Customer surnames
+
+        There should be three users with a surname of 'Harrington'
+
+        Given I have logged into the application
+        When I navigate to the tables page
+        Then I should see three customers with the surname 'Harrington'
+
+    Scenario: Registered users
+
+        There should be four registered users on the page
+
+        Given I have logged into the application
+        When I navigate to the tables page
+        Then I should see four registered users
+
+    Scenario: Default sort order
+
+
+
+
