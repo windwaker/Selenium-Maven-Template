@@ -37,4 +37,16 @@ Feature: Customer Balance
 
 
 
+        NB:          vdxesf     enum of css selectors -> capsules
+        predicates based on those enums
+        negation, and ors, pass in as lambdas to stream
+        chop up streams by filtering out the elements we dont care about
+
+        main focus on heroku tables -> sorting
+        more than 50 euro -> predicates based on test data
+
+        replace anonymous class waits with lambdas, classic intro, hard to teach anon classes
+
+
+
 
