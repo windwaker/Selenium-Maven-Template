@@ -37,10 +37,7 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
         Predicate p = (s) -> s.equals("carbery");
 
-        if(p.test("carbery")){
-
-        }
-        else{
+        if (!p.test("carbery")) {
             Assert.fail("wrong division");
         }
 
@@ -68,6 +65,8 @@ public class GoogleExampleWebDriver extends DriverFactory {
         // not the implementation.
         WebDriver driver = getDriver();
 
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
         // And now use this to visit Google
         driver.get("http://www.google.com");
         // Alternatively the same thing can be done like this
@@ -77,8 +76,7 @@ public class GoogleExampleWebDriver extends DriverFactory {
         WebElement element = driver.findElement(By.name("q"));
 
         // Enter something to search for
-        element.clear();
-        element.sendKeys("Cheese!");
+        clearAndSend(element, "Cheese!");
 
         // Now submit the form. WebDriver will find the form for us from the element
         element.submit();
@@ -88,10 +86,15 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
         // Google's search is rendered dynamically with JavaScript.
         // Wait for the page to load, timeout after 10 seconds
-        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith("cheese!");
-            }
+//        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+//            @Override
+//            public Boolean apply(WebDriver d) {
+//                return d.getTitle().toLowerCase().startsWith("cheese!");
+//            }
+//        });
+
+        wait.until((WebDriver d) -> {
+            return d.getTitle().toLowerCase().startsWith("cheese!");
         });
 
         // Should see: "cheese! - Google Search"
@@ -114,8 +117,7 @@ public class GoogleExampleWebDriver extends DriverFactory {
         WebElement element = driver.findElement(By.name("q"));
 
         // Enter something to search for
-        element.clear();
-        element.sendKeys("Milk!");
+        clearAndSend(element, "Milk!");
 
         // Now submit the form. WebDriver will find the form for us from the element
         element.submit();
@@ -125,13 +127,16 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
         // Google's search is rendered dynamically with JavaScript.
         // Wait for the page to load, timeout after 10 seconds
-        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith("milk!");
-            }
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> {
+            return d.getTitle().toLowerCase().startsWith("milxk!");
         });
 
         // Should see: "cheese! - Google Search"
         System.out.println("Page title is: " + driver.getTitle());
+    }
+
+    private void clearAndSend(WebElement element, String s) {
+        element.clear();
+        element.sendKeys(s);
     }
 }
