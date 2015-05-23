@@ -19,6 +19,17 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
     // https://github.com/windwaker/Selenium-Maven-Template
 
+    // http://zeroturnaround.com/rebellabs/java-8-explained-applying-lambdas-to-java-collections/
+
+    // http://localhost:63343/Selenium-Maven-Template/target/failsafe-reports/index.html#
+
+//    mvn clean verify
+//    allure report generate -v 1.4.1 /Users/colmh/Documes/Selenium-Maven-Template/target/allure-results
+//    allure report open
+
+
+
+
     @Test
     public void tableSortExample() {
 
@@ -156,12 +167,12 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
         // Big data, combine with continuous scrolling
 
-        Assert.assertTrue(isTitleCorrect.test("The Internet"), "wrong title");
+        Assert.assertTrue(isTitleCorrect.test("xThe Internet"), "wrong title");
 
         Assert.assertEquals(total, 4);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void scroll() throws InterruptedException{
         WebDriver driver = getDriver();
         driver.get("http://architectryan.com/2012/10/02/add-to-the-path-on-mac-os-x-mountain-lion/#.UxER1_R_vR0");
