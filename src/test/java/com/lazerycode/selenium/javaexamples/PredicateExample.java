@@ -21,9 +21,11 @@ public class PredicateExample {
         Predicate<Employee> nameStartsWithA = (e) -> e.getName().toLowerCase().startsWith("a");
 
         System.out.println("\nCan vote: ");
+        // no method needed for printListOfVoters
         printFilteredList(employeeList, canVote);
 
         System.out.println("\nCan't have a beer (in Ireland): ");
+        // no method needed for printListOfDrinkers
         printFilteredList(employeeList, noBeer);
 
         // Use default methods, very powerful concept for webpage testing
@@ -32,11 +34,6 @@ public class PredicateExample {
     }
 
     public static void printFilteredList(List<Employee> list, Predicate<Employee> condition){
-
-        //TODO: put tab into toString Method
-        for(Employee e: list){
-            if(condition.test(e))
-                System.out.println("\t" + e.toString());
-        }
+        list.stream().filter(condition).forEach(e -> System.out.println("\t" + e.toString()));
     }
 }
