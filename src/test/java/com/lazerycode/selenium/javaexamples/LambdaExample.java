@@ -12,9 +12,37 @@ import java.util.List;
  */
 public class LambdaExample {
 
+    private static void printEmployee(Employee e)
+    {
+        System.out.println(e);
+    }
+
     public static void main(String[] args) {
 
-        List<Employee> employeeList = Arrays.asList(new Employee(25, "Charlie"), new Employee(24, "Adam"), new Employee(25, "Bob"));
+        List<String> listOfStrings = Arrays.asList(new String("aaa"),
+                                            new String("bbb"),
+                                            new String("ccc"));
+
+        listOfStrings.forEach((String s) -> System.out.println(s));
+
+
+        List<Employee> employeeList = Arrays.asList(new Employee(25, "Charlie"),
+                                                    new Employee(24, "Adam"),
+                                                    new Employee(25, "Bob"));
+
+        System.out.println("I came from a for loop and a method");
+        for(Employee e : employeeList)
+        {
+            printEmployee(e);
+        }
+
+        System.out.println("I came from a lambda");
+        employeeList.forEach((Employee e) -> System.out.println(e));
+
+
+
+
+
 
         System.out.println("=== Before sorting ===");
         for(Employee e:employeeList){
@@ -34,13 +62,17 @@ public class LambdaExample {
             System.out.println(e.toString());
         }
 
+        // scramble list again
+        employeeList = Arrays.asList(new Employee(25, "Charlie"),
+                new Employee(24, "Adam"),
+                new Employee(25, "Bob"));
+
         System.out.println("=== Sorted by Lambda ===");
         Collections.sort(employeeList, (Employee e1, Employee e2) -> e1.getName().compareTo(e2.getName()));
 
         for (Employee e : employeeList) {
             System.out.println(e.toString());
         }
+
     }
 }
-
-
