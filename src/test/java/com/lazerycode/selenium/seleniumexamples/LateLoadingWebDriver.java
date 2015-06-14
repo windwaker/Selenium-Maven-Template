@@ -26,28 +26,40 @@ public class LateLoadingWebDriver extends DriverFactory {
     }
 
     @Test(enabled = true)
-    public void lateLoadingExample() {
+    public void lateLoadingExample() throws InterruptedException {
 
-        //WebDriver driver = getDriver();
         driver.navigate().to("http://the-internet.dev/dynamic_loading/2");
 
         WebElement start = driver.findElement(By.id("start")).findElement(By.tagName("button"));
 
         start.click();
 
-        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return d.findElement(By.id("finish")).isDisplayed();
-           }
-        });
+        Assert.assertTrue(driver.findElement(By.id("finish")).isDisplayed());
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> {
+        //Thread.sleep(10000);
+
+
+        // Create a class and an instance of it just to get at the function :-(
+        // Use IDE shortcut
+//        (new WebDriverWait(driver, 10, 1000)).until(new ExpectedCondition<Boolean>() {
+//            @Override
+//            public Boolean apply(WebDriver d) {
+//                return d.findElement(By.id("finish")).isDisplayed();
+//            }
+//        });
+
+//        (new WebDriverWait(driver, 10)).until((WebDriver d) -> {
+//            return d.findElement(By.id("finish")).isDisplayed();
+//        });
+
+        wait.until((WebDriver d) -> {
+            // lambda returns a boolean, remember this for later
             return d.findElement(By.id("finish")).isDisplayed();
         });
 
-        wait.until(elementIsDisplayed("finish"));
+        // Bonus feature
 
+        //wait.until(elementIsDisplayed("finish"));
     }
 
     private ExpectedCondition<Boolean> elementIsDisplayed(final String value){
