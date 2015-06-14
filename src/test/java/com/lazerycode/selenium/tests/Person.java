@@ -3,12 +3,12 @@ package com.lazerycode.selenium.tests;
 /**
  * Created by colmh on 23/04/2015.
  */
-public class Employee {
+public class Person {
 
     private int age;
     private String name;
 
-    public Employee(int age, String name) {
+    public Person(int age, String name) {
         this.age = age;
         this.name = name;
     }
@@ -31,7 +31,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Person{" +
                 "age=" + age +
                 ", name='" + name + '\'' +
                 '}';
