@@ -1,6 +1,6 @@
 package com.lazerycode.selenium.javaexamples;
 
-import com.lazerycode.selenium.tests.Employee;
+import com.lazerycode.selenium.tests.Person;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,66 +12,63 @@ import java.util.List;
  */
 public class LambdaExample {
 
-    private static void printEmployee(Employee e)
+    // 1. name 2. args 3. body
+    private static void printPerson(Person p)
     {
-        System.out.println(e);
+        System.out.println(p);
     }
 
     public static void main(String[] args) {
 
-        List<String> listOfStrings = Arrays.asList(new String("aaa"),
-                                            new String("bbb"),
-                                            new String("ccc"));
-
-        listOfStrings.forEach((String s) -> System.out.println(s));
-
-
-        List<Employee> employeeList = Arrays.asList(new Employee(25, "Charlie"),
-                                                    new Employee(24, "Adam"),
-                                                    new Employee(25, "Bob"));
+        List<Person> personList = Arrays.asList(new Person(25, "Charlie"),
+                                                    new Person(24, "Adam"),
+                                                    new Person(25, "Bob"));
 
         System.out.println("I came from a for loop and a method");
-        for(Employee e : employeeList)
+        // External iteration
+        for(Person p : personList)
         {
-            printEmployee(e);
+            // Act on the data
+            printPerson(p);
         }
 
         System.out.println("I came from a lambda");
-        employeeList.forEach((Employee e) -> System.out.println(e));
-
-
-
-
+        // Internal Iteration
+        personList.forEach((Person p) -> System.out.println(p));
+        // type inference
+        personList.forEach(p -> System.out.println(p));
+        // Method Reference, more syntactic sugar
+        personList.forEach(System.out::println);
 
 
         System.out.println("=== Before sorting ===");
-        for(Employee e:employeeList){
-            System.out.println(e.toString());
+        for(Person p : personList){
+            System.out.println(p.toString());
         }
 
         // Sort with Inner Class
-        Collections.sort(employeeList, new Comparator<Employee>() {
+        Collections.sort(personList, new Comparator<Person>() {
             @Override
-            public int compare(Employee e1, Employee e2) {
-                return e1.getName().compareTo(e2.getName());
+            public int compare(Person p1, Person p2) {
+                return p1.getName().compareTo(p2.getName());
             }
         });
 
         System.out.println("=== Sorted by inner class ===");
-        for (Employee e : employeeList) {
-            System.out.println(e.toString());
+        for (Person p : personList) {
+            System.out.println(p.toString());
         }
 
         // scramble list again
-        employeeList = Arrays.asList(new Employee(25, "Charlie"),
-                new Employee(24, "Adam"),
-                new Employee(25, "Bob"));
+        personList = Arrays.asList(new Person(25, "Charlie"),
+                new Person(24, "Adam"),
+                new Person(25, "Bob"));
 
         System.out.println("=== Sorted by Lambda ===");
-        Collections.sort(employeeList, (Employee e1, Employee e2) -> e1.getName().compareTo(e2.getName()));
+        Collections.sort(personList, (Person p1, Person p2) -> p1.getName().compareTo(p2.getName()));
 
-        for (Employee e : employeeList) {
-            System.out.println(e.toString());
+        for (Person p : personList) {
+            System.out.println(p.toString());
         }
 
     }
