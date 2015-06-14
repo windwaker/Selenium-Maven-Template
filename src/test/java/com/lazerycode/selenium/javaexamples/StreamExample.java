@@ -1,9 +1,9 @@
 package com.lazerycode.selenium.javaexamples;
 
-import com.lazerycode.selenium.tests.Employee;
+import com.lazerycode.selenium.tests.Person;
 
 import java.util.Arrays;
-import java.util.Comparator;
+
 import static java.util.Comparator.comparing;
 import java.util.List;
 import java.util.function.Predicate;
@@ -15,51 +15,51 @@ public class StreamExample {
 
     public static void main(String[] args) {
 
-        List<Employee> employeeList = Arrays.asList(new Employee(17, "Charlie"),
-                new Employee(24, "Adam"),
-                new Employee(25, "Bob"));
+        List<Person> personList = Arrays.asList(new Person(17, "Charlie"),
+                new Person(24, "Adam"),
+                new Person(25, "Bob"));
 
-//        for(int i=0; i > employeeList.size(); i++)
+//        for(int i=0; i > personList.size(); i++)
 //        {
-//            System.out.println(employeeList[i]);
+//            System.out.println(personList[i]);
 //        }
 //
-//        for(Employee e: employeeList){
+//        for(Person e: personList){
 //            System.out.println(e);
 //        }
 
         System.out.println("Raw Data:");
-        employeeList.stream().forEach(
-                (Employee e) -> System.out.println("\t" + e)
+        personList.stream().forEach(
+                (Person p) -> System.out.println("\t" + p)
         );
 
         System.out.println("Sorted A-Z:");
-        employeeList.stream().sorted(comparing((Employee e) -> e.getName())).forEach(
-                (Employee e) -> System.out.println("\t" + e)
+        personList.stream().sorted(comparing((Person e) -> e.getName())).forEach(
+                (Person p) -> System.out.println("\t" + p)
         );
 
         System.out.println("Sorted A-Z: (Method Reference)");
-        employeeList.stream().sorted(comparing(Employee::getName)).forEach(
-                (Employee e) -> System.out.println("\t" + e)
+        personList.stream().sorted(comparing(Person::getName)).forEach(
+                (Person p) -> System.out.println("\t" + p)
         );
 
         System.out.println("Sorted Z-A:");
-        employeeList.stream().sorted(comparing(Employee::getName).reversed()).forEach(
-                (Employee e) -> System.out.println("\t" + e)
+        personList.stream().sorted(comparing(Person::getName).reversed()).forEach(
+                (Person p) -> System.out.println("\t" + p)
         );
 
         System.out.println("Filtered: (inline)");
         // avoid inline predicates where possible for maintenance reasons
-        employeeList.stream().filter((e) -> e.getAge() > 21).forEach(
-                (Employee e) -> System.out.println("\t" + e)
+        personList.stream().filter((e) -> e.getAge() > 21).forEach(
+                (Person p) -> System.out.println("\t" + p)
         );
 
         // no need to specify a type, JVM can infer it.
-        Predicate<Employee> over21 = (e) -> e.getAge() > 21;
+        Predicate<Person> over21 = (p) -> p.getAge() > 21;
 
         System.out.println("Filtered: (external predicate)");
-        employeeList.stream().filter(over21).forEach(
-                (Employee e) -> System.out.println("\t" + e)
+        personList.stream().filter(over21).forEach(
+                (Person p) -> System.out.println("\t" + p)
         );
     }
 }
