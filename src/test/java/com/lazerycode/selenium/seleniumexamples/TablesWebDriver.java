@@ -21,23 +21,23 @@ public class TablesWebDriver extends DriverFactory {
         // Set Run-Configuration
 
         WebDriver driver = getDriver();
-        driver.get("http://the-internet.dev/tables");
+        driver.navigate().to("http://the-internet.dev/tables");
 
         Predicate<String> isTitleCorrect = title -> driver.getTitle().equalsIgnoreCase(title);
-
         Predicate<WebElement> isTicked = WebElement::isSelected;
 
-        List<WebElement> checkboxes = driver.findElements(By.tagName("input"));
+        List<WebElement> listOfCheckboxes = driver.findElements(By.tagName("input"));
 
-        int total = (int) checkboxes
+        int total = (int) listOfCheckboxes
                 .stream()
-                .filter(isTicked.negate())
+                .filter(isTicked)
                 .count();
 
         // Big data, combine with continuous scrolling
 
         Assert.assertTrue(isTitleCorrect.test("The Internet"),
                     "The title is wrong, maybe you're on the wrong URL: " + driver.getCurrentUrl());
+
         Assert.assertEquals(total, 4);
     }
 }
